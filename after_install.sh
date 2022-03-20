@@ -18,8 +18,8 @@ find $DEPLOYMENT_SRC -type f -exec chmod 660 {} \;
 echo "Move folder into place"
 mv $DEPLOYMENT_DST $DEPLOYMENT_TMP && mv $DEPLOYMENT_SRC $DEPLOYMENT_DST && rm -rf $DEPLOYMENT_TMP
 
-sudo php artisan optimize:clear
-sudo php artisan optimize
-sudo composer dump-autoload -o
-sudo systemctl restart nginx php-fpm
-sudo supervisorctl restart all
+# sudo php artisan optimize:clear
+# sudo php artisan optimize
+# sudo composer dump-autoload -o
+# sudo systemctl restart nginx php-fpm
+# sudo supervisorctl restart all
