@@ -12,4 +12,4 @@ hooks:
   ValidateService:
     - location: validate_service.sh
       timeout: 300
-      runas: root%
+      runas: root
