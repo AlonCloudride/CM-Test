@@ -20,6 +20,6 @@ mv $DEPLOYMENT_DST $DEPLOYMENT_TMP && mv $DEPLOYMENT_SRC $DEPLOYMENT_DST && rm -
 
 php artisan optimize:clear
 php artisan optimize
-composer dump-autoload -o
+# composer dump-autoload -o
 sudo systemctl restart nginx php-fpm
 sudo supervisorctl restart all
