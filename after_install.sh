@@ -21,5 +21,5 @@ mv $DEPLOYMENT_DST $DEPLOYMENT_TMP && mv $DEPLOYMENT_SRC $DEPLOYMENT_DST && rm -
 # sudo php artisan optimize:clear
 # sudo php artisan optimize
 # sudo composer dump-autoload -o
-# sudo systemctl restart nginx php-fpm
-# sudo supervisorctl restart all
+sudo systemctl restart nginx php-fpm
+sudo supervisorctl restart all
