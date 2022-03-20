@@ -1,7 +1,11 @@
 name: CI/CD Pipeline
 on:
   push:
-    branches: [ main ]
+    branches:
+        - main
+#        - staging
+#        - staging-kosta
+#        - staging-maria
 
 jobs:
   continuous-integration:
@@ -15,7 +19,7 @@ jobs:
         with:
           aws-access-key-id:${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key:${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+        aws-region: ${{ secrets.AWS_REGION }}
 
   continuous-deployment:
     runs-on: linux
@@ -28,7 +32,7 @@ jobs:
         with:
           aws-access-key-id:${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key:${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+        aws-region: ${{ secrets.AWS_REGION }}
      # Step 2
       - name: Create CodeDeploy Deployment
         id: deploy
