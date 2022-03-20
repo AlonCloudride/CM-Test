@@ -31,7 +31,7 @@ jobs:
         id: deploy
         run: |
           aws deploy create-deployment \
-            --application-name CM-Test \
-            --deployment-group-name CM-Test-DG \
+            --application-name prod-Capital_Management \
+            --deployment-group-name prod-Capital_Management-DG \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
