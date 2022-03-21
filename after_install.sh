@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DEPLOYMENT_SRC=/tmp/deploy-$DEPLOYMENT_GROUP_ID-$DEPLOYMENT_ID
-DEPLOYMENT_DST=/usr/share/nginx/html/app/payment-gateway-back
+DEPLOYMENT_DST=/usr/share/nginx/html/app/payment-gateway
 DEPLOYMENT_TMP=`mktemp -d`
 
 echo "Fixing permissions"
@@ -20,7 +20,7 @@ echo "Move folder into place"
 mv $DEPLOYMENT_DST $DEPLOYMENT_TMP && mv $DEPLOYMENT_SRC $DEPLOYMENT_DST && rm -rf $DEPLOYMENT_TMP
 
 echo "Moving to deployment folder"
-cd $DEPLOYMENT_DST
+cd /usr/share/nginx/html/app/payment-gateway-back
 ls -la && pwd
 
 echo "Artisan"
