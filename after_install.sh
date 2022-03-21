@@ -17,12 +17,12 @@ find $DEPLOYMENT_SRC -type f -exec chmod 660 {} \;
 #         echo "Cant find vandor"
 #         exit 1
 #fi
-aws s3 cp s3://pm-gateway-prod-bucket/.env.production .env
 echo "Move folder into place"
 mv $DEPLOYMENT_DST $DEPLOYMENT_TMP && mv $DEPLOYMENT_SRC $DEPLOYMENT_DST && rm -rf $DEPLOYMENT_TMP
 
 echo "Moving to deployment folder"
 cd $DEPLOYMENT_DST
+aws s3 cp s3://pm-gateway-prod-bucket/.env.production .env
 ls -la && pwd
 
 echo "Artisan"
