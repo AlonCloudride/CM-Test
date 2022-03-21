@@ -20,7 +20,7 @@ echo "Move folder into place"
 mv $DEPLOYMENT_DST $DEPLOYMENT_TMP && mv $DEPLOYMENT_SRC $DEPLOYMENT_DST && rm -rf $DEPLOYMENT_TMP
 
 echo "Moving to deployment folder"
-cd /usr/share/nginx/html/app/payment-gateway-back
+cd $DEPLOYMENT_DST
 ls -la && pwd
 
 echo "Artisan"
