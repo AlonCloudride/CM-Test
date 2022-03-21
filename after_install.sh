@@ -9,6 +9,7 @@ sudo chown -R nginx:nginx $DEPLOYMENT_SRC
 find $DEPLOYMENT_SRC -type d -exec chmod 770 {} \;
 find $DEPLOYMENT_SRC -type f -exec chmod 660 {} \;
 
+echo "Checking for composer"
 if [ ! -f $DEPLOYMENT_SRC/composer.json ] || [ -f $DEPLOYMENT_SRC/composer.phar ];
 then
          echo "Cant find vandor"
@@ -18,13 +19,18 @@ fi
 echo "Move folder into place"
 mv $DEPLOYMENT_DST $DEPLOYMENT_TMP && mv $DEPLOYMENT_SRC $DEPLOYMENT_DST && rm -rf $DEPLOYMENT_TMP
 
+echo "Moving to deployment folder"
 cd $DEPLOYMENT_DST
+ls -la && pwd
 
+echo "Artisan"
 php artisan optimize:clear
 php artisan optimize
 
+echo "Composer"
 composer dump-autoload -o
 
+echo "Restarts"
 sudo systemctl restart nginx php-fpm
 
 sudo supervisorctl restart all
