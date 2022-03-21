@@ -15,5 +15,5 @@ echo "Install composer"
 echo "Run composer install"
 ./composer.phar i --no-interaction --prefer-dist --optimize-autoloader
 
-echo "Remove composer.phar"
-rm -f composer.phar
+#echo "Remove composer.phar"
+#rm -f composer.phar
