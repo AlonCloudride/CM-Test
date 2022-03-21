@@ -28,7 +28,7 @@ php artisan optimize:clear
 php artisan optimize
 
 echo "Composer"
-composer dump-autoload -o
+./composer.phar dump-autoload -o
 
 echo "Restarts"
 sudo systemctl restart nginx php-fpm
