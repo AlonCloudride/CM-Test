@@ -6,7 +6,7 @@ DEPLOYMENT_DST=/tmp/deploy-$DEPLOYMENT_GROUP_ID-$DEPLOYMENT_ID
 mkdir $DEPLOYMENT_DST
 
 echo "Copy to tmp deployment folder"
-rsync -r --exclude-from=$DEPLOYMENT_SRC/deploy/.exclude $DEPLOYMENT_SRC/ $DEPLOYMENT_DST
+rsync -r $DEPLOYMENT_SRC/ $DEPLOYMENT_DST
 
 cd $DEPLOYMENT_DST
 
