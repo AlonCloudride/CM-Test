@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DEPLOYMENT_SRC=/tmp/deploy-$DEPLOYMENT_GROUP_ID-$DEPLOYMENT_ID
-DEPLOYMENT_DST=/usr/share/nginx/html/app/payment-gateway
+DEPLOYMENT_DST=/usr/share/nginx/html/app/payment-gateway-back
 DEPLOYMENT_TMP=`mktemp -d`
 
 echo "Fixing permissions"
