@@ -4,20 +4,20 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''
-                echo(Logging to aws ecr -- only for local)
+                echo "Logging to aws ecr -- only for local"
                 aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 831510679322.dkr.ecr.eu-central-1.amazonaws.com
-                echo(Logged in.)
+                echo "Logged in."
 
                 docker pull 831510679322.dkr.ecr.eu-central-1.amazonaws.com/cv25-bigeye:sdk-3.0.3
                 
-                echo(Get newest core file version from s3...)
+                echo "Get newest core file version from s3..."
                 S3_CORE_FILE=$(aws s3 ls s3://driversense-validation/core/ --recursive --profile cipia | sort | tail -1)
                 S3_CORE_VER=$(cut -d " " -f 5 $S3_CORE_FILE)
-                echo(Latest core ver: ${S3_CORE_VER})
+                echo "Latest core ver: ${S3_CORE_VER}"
                 
                 cd /validation_files
                 
-                echo(Get current version...)
+                echo "Get current version..."
                 LOCAL_CORE_FILE=$(find . -name "dms-*")
                 LOCAL_CORE_VER=$(cut -d '/' -f 3 $LOCAL_CORE_FILE)
                 
