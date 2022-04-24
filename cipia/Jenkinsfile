@@ -1,0 +1,44 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Build') { 
+            steps {
+                sh '''
+                echo(Logging to aws ecr -- only for local)
+                aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 831510679322.dkr.ecr.eu-central-1.amazonaws.com
+                echo(Logged in.)
+
+                docker pull 831510679322.dkr.ecr.eu-central-1.amazonaws.com/cv25-bigeye:sdk-3.0.3
+                
+                echo(Get newest core file version from s3...)
+                S3_CORE_FILE=$(aws s3 ls s3://driversense-validation/core/ --recursive --profile cipia | sort | tail -1)
+                S3_CORE_VER=$(cut -d " " -f 5 $S3_CORE_FILE)
+                echo(Latest core ver: ${S3_CORE_VER})
+                
+                cd /validation_files
+                
+                echo(Get current version...)
+                LOCAL_CORE_FILE=$(find . -name "dms-*")
+                LOCAL_CORE_VER=$(cut -d '/' -f 3 $LOCAL_CORE_FILE)
+                
+                if [ $S3_CORE_VER != $LOCAL_CORE_VER ]; then
+                    rm $LOCAL_CORE_FILE
+                    aws s3 cp s3://driversense-validation/core/${S3_CORE_VER}
+                fi
+
+                docker run -d -it --name CV25 --mount type=bind,source=/validation_files,target=/validation_files 87dbd2a1ccc9
+
+                docker exec -it CV25 /bin/bash
+
+                cd /validation_files/driversense-cloudride-poc
+
+                cmake CMakeLists.txt -DDriverSense_DIR=/validation_files/dms-core-7.9.8-linux64/lib/cmake/DriverSense -DOpenCV_DIR=/tmp/opencv-4.2.0/platforms/linux/build/
+                '''
+            }
+        }
+        stage('Deploy') { 
+            steps {
+            }
+        }
+    }
+}
