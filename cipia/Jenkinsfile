@@ -3,10 +3,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh '''
-
-                docker pull 831510679322.dkr.ecr.eu-central-1.amazonaws.com/cv25-bigeye:sdk-3.0.3
-                
+                sh '''                
                 echo "Get newest core file version from s3..."
                 S3_CORE_FILE=$(aws s3 ls s3://driversense-validation/core/ --recursive --profile cipia | sort | tail -1)
                 S3_CORE_VER=$(cut -d " " -f 5 $S3_CORE_FILE)
