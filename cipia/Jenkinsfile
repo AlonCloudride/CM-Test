@@ -4,14 +4,11 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''                
-                echo "Get newest core file version from s3..."
                 S3_CORE_FILE=$(aws s3 ls s3://driversense-validation/core/ --recursive --profile cipia | sort | tail -1)
                 S3_CORE_VER=$(cut -d " " -f 5 $S3_CORE_FILE)
-                echo "Latest core ver: ${S3_CORE_VER}"
                 
                 cd /validation_files
                 
-                echo "Get current version..."
                 LOCAL_CORE_FILE=$(find . -name "dms-*")
                 LOCAL_CORE_VER=$(cut -d '/' -f 3 $LOCAL_CORE_FILE)
                 
