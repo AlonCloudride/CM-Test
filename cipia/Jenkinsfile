@@ -4,9 +4,6 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''
-                echo "Logging to aws ecr -- only for local"
-                aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 831510679322.dkr.ecr.eu-central-1.amazonaws.com
-                echo "Logged in."
 
                 docker pull 831510679322.dkr.ecr.eu-central-1.amazonaws.com/cv25-bigeye:sdk-3.0.3
                 
