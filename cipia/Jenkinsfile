@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh '''                
+                sh '''
+                
                 S3_CORE_FILE=$(aws s3 ls s3://driversense-validation/core/ --recursive --region eu-central-1 | sort | tail -1)
                 S3_CORE_VER=$(cut -d " " -f 5 $S3_CORE_FILE)
                 
